@@ -6,7 +6,7 @@ import { Modal } from './Modal/Modal';
 import { Button } from './Button/Button';
 
 import { Component } from 'react';
-import { Hearts } from 'react-loader-spinner';
+import { Spinner } from './Loader/Loader';
 import PropTypes from 'prop-types';
 
 export class App extends Component {
@@ -45,8 +45,8 @@ export class App extends Component {
     event.preventDefault();
 
     const inputName = event.target[1].name;
-    const searchedPhrase = event.target[1].value.split(' ').join('+');
-
+    const searchedPhrase = event.target[1].value.split(' ').join('');
+    this.clearState();
     this.setState({ [inputName]: searchedPhrase });
   };
 
@@ -63,7 +63,7 @@ export class App extends Component {
     ) {
       this.setState({ isLoading: true });
 
-      // this.clearState();
+      
 
       const response = await fetchImages(
         this.state.searchedText,
@@ -111,13 +111,7 @@ export class App extends Component {
     return (
       <div onClick={this.closeModal}>
         <Searchbar whenSubmit={this.handleSubmit} />
-        {this.state.isLoading && <Hearts />}
-        <Button
-          searchForMore={this.state.searchForMore}
-          nextPage={this.changePage}
-          images={this.state.images}
-          actualPage={this.state.actualPage}
-        />
+        {this.state.isLoading && <Spinner />}
         <ImageGallery
           closeModal={this.closeModal}
           close={this.closeModal}

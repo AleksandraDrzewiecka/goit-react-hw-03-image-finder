@@ -22,9 +22,11 @@ export class Searchbar extends Component {
             autoComplete="off"
             autoFocus
             placeholder="Search images and photos"
+            onChange={this.onHandleChange}
           />
         </form>
       </header>
     );
   }
 }
+export default Searchbar;
